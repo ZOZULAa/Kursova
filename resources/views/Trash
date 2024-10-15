@@ -1,0 +1,10 @@
+
+<form action="/home/submit" method="post">
+    @csrf
+    <div class="form-group">
+        <label for="name"> Введіть назву </label>
+        <input type="text" name="name" placeholder="Введіть назву" id="name" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-success">Відправити</button>
+</for>
