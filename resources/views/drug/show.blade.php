@@ -14,7 +14,7 @@
             @csrf
             @method('delete')
             <input type="submit" value="Delete">
-        </form>
+        </form> 
     </div>
     <div>
         <a href="{{ route("drug.index")}}"> Back </a>
