@@ -1,8 +1,12 @@
 @extends('layouts.app')
-@section ('title')Курсова робота
+@section ('title')About
 @endsection
 @section('content')
 
-<h1> Курсова робота </h1>
+<h1 class="mb-3"> Курсова робота </h1>
+<p> Сломінський Юрій </p>
+<p> ІПЗс-24-1 Хмельницький національний університет </p>
+<p> Інтернет-магазин з продажу ліків </p>
+
 
 @endsection

@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('drugs', function (Blueprint $table) {
-            $table->dropColumn('description');
+        Schema::create('administrator', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('drugs', function (Blueprint $table) {
-            $table->text('description')->nullable()->after('drug_content');
-        });
+        Schema::dropIfExists('administrator');
     }
 };

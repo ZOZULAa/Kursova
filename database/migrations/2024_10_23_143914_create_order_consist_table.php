@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('drugs', function (Blueprint $table) {
-            $table->renameColumn('content', 'drug_content');
+        Schema::create('order_consist', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('drugs', function (Blueprint $table) {
-            $table->renameColumn('drug_content', 'content');
-        });
+        Schema::dropIfExists('order_consist');
     }
 };

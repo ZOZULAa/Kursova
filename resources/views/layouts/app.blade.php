@@ -6,16 +6,14 @@
     <title> @yield('title') </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
 </head>
-<body>
+<body class="bg-success">
 
     @include('inc.header')
 
-    <div class="row">
-        <div class="col">
+    <div class=" position-absolute bg-white h-100 w-75" >
+        <div class="ms-5">
         @yield('content')
         </div>
-
-    @include('inc.aside')
     </div>
 </body>
 </html>

@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('drugs', function (Blueprint $table) {
-            $table->string('drug_content')->change();
+        Schema::create('order', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('drugs', function (Blueprint $table) {
-            $table->text('drug_content')->change();
-        });
+        Schema::dropIfExists('order');
     }
 };

@@ -25,9 +25,3 @@ Route::delete('/drug/{drug}', 'App\Http\Controllers\DrugController@destroy')->na
 
 Route::get('/drug/update', 'App\Http\Controllers\DrugController@update');
 Route::get('/drug/delete', 'App\Http\Controllers\DrugController@delete');
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index');
-
-Route::get('/about', 'App\Http\Controllers\AboutController@index');
-
-Route::get('/drugList', 'App\Http\Controllers\DrugListController@index');

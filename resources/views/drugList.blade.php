@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section ('title')Drugs
+@section ('title')Medicine
 @endsection
 @section('content')
 
-<h1> Drugs </h1>
+<h1> Medicine </h1>
 
 @endsection
