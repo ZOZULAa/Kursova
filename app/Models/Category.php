@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
-    protected $table = 'drugs';
-    protected $guarded = false;
+    public function medicines() {
+        return $this->hasMany(Medicine::class, 'medicine_id', 'id');
+    }
 }

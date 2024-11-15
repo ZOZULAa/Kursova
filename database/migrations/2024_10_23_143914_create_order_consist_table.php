@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_consist', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('order_id');
+            $table->integer('medicine_id');
+            $table->integer('amount');
         });
     }
 

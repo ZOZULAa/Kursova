@@ -11,17 +11,21 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/drugList', function () {
-    return view('drugList');
-});
+Route::get('/medicineList/search', 'App\Http\Controllers\MedicineListController@index')->name('medicineList');
+Route::get('/medicineList', 'App\Http\Controllers\MedicineListController@index')->name('medicineList.index');
+Route::post('/medicineList', 'App\Http\Controllers\MedicineListController@store')->name('medicineList.store');
+Route::get('/medicineList/{medicine}', 'App\Http\Controllers\MedicineListController@show')->name('medicineList.show');
 
-Route::get('/drug', 'App\Http\Controllers\DrugController@index')->name('drug.index');
-Route::get('/drug/create', 'App\Http\Controllers\DrugController@create')->name('drug.create');
-Route::post('/drug', 'App\Http\Controllers\DrugController@store')->name('drug.store');
-Route::get('/drug/{drug}', 'App\Http\Controllers\DrugController@show')->name('drug.show');
-Route::get('/drug/{drug}/edit', 'App\Http\Controllers\DrugController@edit')->name('drug.edit');
-Route::patch('/drug/{drug}', 'App\Http\Controllers\DrugController@update')->name('drug.update');
-Route::delete('/drug/{drug}', 'App\Http\Controllers\DrugController@destroy')->name('drug.delete');
+Route::get('/medicine/search', 'App\Http\Controllers\MedicineController@index')->name('medicine');
+Route::get('/medicine', 'App\Http\Controllers\MedicineController@index')->name('medicine.index');
+Route::get('/medicine/create', 'App\Http\Controllers\MedicineController@create')->name('medicine.create');
+Route::post('/medicine', 'App\Http\Controllers\MedicineController@store')->name('medicine.store');
+Route::get('/medicine/{medicine}', 'App\Http\Controllers\MedicineController@show')->name('medicine.show');
+Route::get('/medicine/{medicine}/edit', 'App\Http\Controllers\MedicineController@edit')->name('medicine.edit');
+Route::patch('/medicine/{medicine}', 'App\Http\Controllers\MedicineController@update')->name('medicine.update');
+Route::delete('/medicine/{medicine}', 'App\Http\Controllers\MedicineController@destroy')->name('medicine.delete');
 
-Route::get('/drug/update', 'App\Http\Controllers\DrugController@update');
-Route::get('/drug/delete', 'App\Http\Controllers\DrugController@delete');
+Route::get('/medicine/update', 'App\Http\Controllers\MedicineController@update');
+Route::get('/medicine/delete', 'App\Http\Controllers\MedicineController@delete');
+
+
