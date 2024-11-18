@@ -1,45 +1,79 @@
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-light border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal pe-5">
-        <a class="text-dark" href="{{route('medicineList.index')}}" style="text-decoration: none">Твоє здоров'я</a>
-    </h5>
-    
-    <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="{{route('medicineList.index')}}" style="text-decoration: none">Medicine</a>
-        <a class="p-2 text-dark" href="/about" style="text-decoration: none">About</a>
-        <a class="p-2 text-dark" href="/medicine" style="text-decoration: none">CRUD</a>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+    <div class="container-fluid">
+        <!-- Назва сайту -->
+        <a class="navbar-brand" href="{{ route('medicineList.index') }}">Твоє здоров'я</a>
 
-    <!-- Переміщуємо меню профілю вправо -->
-    <div class="ms-auto hidden sm:flex sm:items-center sm:ms-6">
-        <x-dropdown align="right" width="48">
-            <x-slot name="trigger">
-                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                    <div>{{ Auth::user()->name }}</div>
+        <!-- Кнопка для мобільного меню -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                    <div class="ms-1">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
+        <!-- Основне меню -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('medicineList.index') }}">Medicine</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/medicine">CRUD</a>
+                </li>
+            </ul>
+
+            <!-- Меню для аутентифікованих користувачів -->
+            @auth
+            <ul class="navbar-nav me-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cart.index') }}">Кошик</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('orders.index') }}">Замовлення</a>
+                </li>
+            </ul>
+            @endauth
+
+            <!-- Меню профілю -->
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownProfileMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    @auth
+                        {{ Auth::user()->name }}
+                    @endauth
+                    @guest
+                        Profile
+                    @endguest
                 </button>
-            </x-slot>
-
-            <x-slot name="content">
-                <x-dropdown-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-dropdown-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-dropdown-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-dropdown-link>
-                </form>
-            </x-slot>
-        </x-dropdown>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownProfileMenu">
+                    @auth
+                        <li>
+                            <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                {{ __('Profile') }}
+                            </a>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="dropdown-item">
+                                    {{ __('Log Out') }}
+                                </button>
+                            </form>
+                        </li>
+                    @endauth
+                    @guest
+                        <li>
+                            <a class="dropdown-item" href="{{ route('login') }}">
+                                {{ __('Login') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('register') }}">
+                                {{ __('Register') }}
+                            </a>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
+</nav>

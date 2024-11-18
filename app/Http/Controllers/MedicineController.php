@@ -9,14 +9,13 @@ use App\Models\Category;
 class MedicineController
 {
     public function index(Request $request){
-        $search = $request->input('search', '');
         $categ = $request->input('category_id', '');
-        $medicines = Medicine::where('title', 'like', "%" . $search . "%")
-            ->when($categ != '', function ($q) use($categ) { $q->where('category_id', '=', $categ); })
+        $medicines = Medicine::when($categ != '', 
+                function ($q) use($categ) { $q->where('category_id', '=', $categ); })
             ->get();
 
         $categories = Category::all();
-        return view('medicine.index', compact('medicines', 'categories', 'categ', 'search'));
+        return view('medicine.index', compact('medicines', 'categories', 'categ'));
     }
 
    public function create()
@@ -29,12 +28,12 @@ class MedicineController
    public function store()
    {
         $data = request()->validate([
-            'title' => 'string',
-            'medicine_content' => 'string',
-            'image' => 'string',
-            'price' => 'integer',
-            'count' => 'integer',
-            'category_id' => 'integer',
+            'title' => 'required|string|max:255',
+            'medicine_content' => 'required|string', 
+            'image' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'count' => 'required|integer|min:1',
+            'category_id' => 'required|integer|exists:categories,id', 
         ]);
         Medicine::create($data);
         return redirect()->route('medicine.index');
@@ -55,12 +54,12 @@ class MedicineController
     public function update(Medicine $medicine)
     {
         $data = request()->validate([
-            'title' => 'string',
-            'medicine_content' => 'string',
-            'image' => 'string',
-            'price' => 'integer',
-            'count' => 'integer',
-            'category_id' => 'integer',
+            'title' => 'required|string|max:255',
+            'medicine_content' => 'required|string', 
+            'image' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'count' => 'required|integer|min:1',
+            'category_id' => 'required|integer|exists:categories,id', 
         ]);
         $medicine->update($data);
         return redirect()->route("medicine.show", $medicine->id);

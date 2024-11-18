@@ -16,4 +16,9 @@ class User extends Authenticatable
     use HasRolesAndAbilities;
     
     protected $guarded = false;
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

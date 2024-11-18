@@ -11,8 +11,13 @@ class MedicineListController
 
     public function index(Request $request){
         $search = $request->input('search', '');
-        $medicines = Medicine::where('title', 'like', "%" . $search . "%")->get();
-        return view('medicineList.index', compact('medicines'));
+        $categ = $request->input('category_id', '');
+        $medicines = Medicine::where('title', 'like', "%" . $search . "%")
+            ->when($categ != '', function ($q) use($categ) { $q->where('category_id', '=', $categ); })
+            ->get();
+
+        $categories = Category::all();
+        return view('medicineList.index', compact('medicines', 'categories', 'categ', 'search'));
     }
 
     public function show($id){
