@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('email');
-            $table->text('login')->nullable();
             $table->text('password');
-            $table->date('date')->nullable();
+            $table->string('role', 10);
+
             $table->timestamps();
         });
     }

@@ -17,9 +17,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/medicine">CRUD</a>
-                </li>
+                @if((auth()->user()->role ?? '') == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/medicine">CRUD</a>
+                    </li>
+                @endif
             </ul>
 
             <!-- Меню для аутентифікованих користувачів -->
