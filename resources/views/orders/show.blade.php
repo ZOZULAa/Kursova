@@ -2,12 +2,8 @@
 
 @section('content')
 <div class="container mt-4">
-    <h1>Мої замовлення</h1>
-    @foreach($orders as $order)
+    <h1>Замовлення #{{$order->id}}</h1>
         <div class="card mb-4 shadow-sm" style="border-radius: 10px;">
-            <div class="card-header">
-                <h2><a href="{{ route('orders.show', $order->id) }}">Замовлення #{{ $order->id }}</a></h2>
-            </div>
             <div class="card-body">
                 <p><strong>Статус:</strong> Опрацьовується</p>
                 <div class="d-flex justify-content-between align-items-center my-3">
@@ -50,13 +46,11 @@
                         @endforeach
                     </tbody>
                 </table>
-
                 <div class="d-flex justify-content-between">
                     <h4>Загальна сума:</h4>
                     <h4>{{ $total }} грн</h4>
                 </div>
             </div>
         </div>
-    @endforeach
 </div>
 @endsection

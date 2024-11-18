@@ -8,7 +8,7 @@ class OrderItem extends Model
 {
     use HasFactory;
 
-    protected $table = 'order_items'; // Можливо, вам потрібна міграція
+    protected $table = 'order_items';
     protected $guarded = false;
 
     public function order()

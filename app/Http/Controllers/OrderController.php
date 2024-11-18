@@ -43,5 +43,26 @@ class OrderController extends Controller
 
     return redirect()->route('orders.index')->with('success', 'Замовлення створено.');
 }
+public function show($orderId)
+    {
+        $order = Order::with('items.itemable') 
+                        ->where('id', $orderId)
+                        ->firstOrFail(); 
+
+        return view('orders.show', compact('order'));
+    }
+    public function cancel($orderId)
+    {
+        $order = Order::where('id', $orderId)
+                    ->where('user_id', auth()->id()) // Переконуємося, що це замовлення належить користувачеві
+                    ->with('items')
+                    ->firstOrFail();
+
+        $order->items()->delete();
+
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('success', 'Замовлення успішно скасовано.');
+    }
 
 }

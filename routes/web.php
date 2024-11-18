@@ -24,7 +24,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
         Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
         Route::post('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+        Route::delete('/orders/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
 
 });
 Route::get('/medicineList/search', 'App\Http\Controllers\MedicineListController@index')->name('medicineList');
